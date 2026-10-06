@@ -1,0 +1,17 @@
+enable
+configure terminal
+hostname SW1
+vlan 10
+ name SALES
+vlan 20
+ name ENG
+interface range fa0/23 - 24
+ switchport mode trunk
+interface fa0/1
+ switchport mode trunk
+interface fa0/2
+ switchport mode access
+ switchport access vlan 10
+spanning-tree vlan 1,10,20 priority 4096
+end
+write memory

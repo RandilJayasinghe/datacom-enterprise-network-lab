@@ -1,0 +1,28 @@
+enable
+configure terminal
+hostname R3
+interface g0/0
+ ip address 10.1.23.2 255.255.255.252
+ no shutdown
+interface g0/1
+ no shutdown
+interface g0/1.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+interface g0/1.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ip access-list extended BLOCK-ENG-TO-SALES
+ deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+ permit ip any any
+interface g0/1.20
+ ip access-group BLOCK-ENG-TO-SALES in
+router ospf 1
+ router-id 3.3.3.3
+ network 10.1.23.0 0.0.0.3 area 1
+ network 192.168.10.0 0.0.0.255 area 1
+ network 192.168.20.0 0.0.0.255 area 1
+ passive-interface g0/1.10
+ passive-interface g0/1.20
+end
+write memory
