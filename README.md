@@ -6,6 +6,7 @@ A production-grade enterprise routing, switching, and security topology designed
 
 ## Topology Architecture
 
+![Enterprise Multi-AS Topology](enterprise-multi-as-topology.png)
 ![Network Topology](topology.png)
 
 ### Design Specifications
